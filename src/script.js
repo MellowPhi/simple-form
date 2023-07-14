@@ -1,11 +1,16 @@
 const form = document.getElementById("form");
+const inputs = form.querySelectorAll('input');
 
 form.addEventListener('submit', function (event) {
     event.preventDefault();
+    const inputs = form.querySelectorAll("input");
+    inputs.forEach(input => {
+        input.value = "";
+    });
 });
 
 
-const inputs = form.querySelectorAll('input');
+
 inputs.forEach(input => {
     input.addEventListener('input', function () {
         localStorage.setItem(input.name, input.value);
@@ -22,3 +27,6 @@ window.addEventListener("load", () => {
         }
     });
 });
+
+
+
