@@ -5,6 +5,4 @@ TODO
 
 [x] Add multiple history cards
 
-[] Add delete functionality for history cards
-
-[] 
+[x] Add delete functionality for history cards
