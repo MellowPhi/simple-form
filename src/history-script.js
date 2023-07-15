@@ -20,6 +20,8 @@ window.addEventListener("load", () => {
 })
 
 
+
+
 historyLists.addEventListener("click", function(event) {
     if (event.target.classList.contains("delete-button")) {
         // Call the deleteEntry function
