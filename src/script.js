@@ -10,7 +10,11 @@ inputs.forEach(input => {
 });
 
 
-
+window.addEventListener("storage", function(event) {
+    if (event.key === 'entryListUpdated') {
+        autoFillInputs();
+    }
+})
 
 function autoFillInputs() {
     const inputs = form.querySelectorAll("input");
@@ -55,7 +59,6 @@ function saveFormEntry() {
     entryList.push(entry);
     localStorage.setItem('entryList', JSON.stringify(entryList));
 
-
+    // Trigger the storage event
+    localStorage.setItem('entryListUpdated', Date.now());
 }
-
-
