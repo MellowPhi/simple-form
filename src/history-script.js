@@ -16,24 +16,47 @@ window.addEventListener("load", () => {
         const fieldValue = localStorage.getItem(fieldName);
         formData[fieldName] = fieldValue || "";
     });
-
-
-    createFormHistoryEntry(formData);
+    renderEntries();
 })
 
-window.addEventListener("load", () => {
-    const entryList = JSON.parse(localStorage.getItem('entryList')) || [];
-    const historyLists = document.getElementById("history-card-lists");
-    //const historyContainer = document.getElementById("history-container");
 
-    entryList.forEach(entry => {
-        const formEntry = createFormHistoryEntry(entry);
+historyLists.addEventListener("click", function(event) {
+    if (event.target.classList.contains("delete-button")) {
+        // Call the deleteEntry function
+        deleteEntry(event.target.getAttribute("id"));
+    }
+    renderEntries();
+
+})
+
+function deleteEntry(index) {
+    // Remove the entry using index of the entryList
+    const entryList = JSON.parse(localStorage.getItem('entryList'));
+    if (index >= 0 && index < entryList.length) {
+        entryList.splice(index, 1);
+    }
+    console.log(index);
+    console.log(entryList);
+    localStorage.setItem('entryList', JSON.stringify(entryList));
+
+}
+
+
+function renderEntries() {
+    const entryList = JSON.parse(localStorage.getItem('entryList')) || [];
+    //const historyContainer = document.getElementById("history-container");
+    // Clear existing entries
+    historyLists.innerHTML = "";
+
+    // TO DEBUG
+    console.log(entryList);
+    entryList.forEach((entry, index) => {
+        const formEntry = createFormHistoryEntry(entry, index);
         historyLists.appendChild(formEntry);
     });
-});
+}
 
-
-function createFormHistoryEntry(entry) {
+function createFormHistoryEntry(entry, index) {
     const listEntry = document.createElement("li");
     listEntry.classList.add("history-card-lists");
     listEntry.setAttribute("id", "history-card-lists");
@@ -56,6 +79,7 @@ function createFormHistoryEntry(entry) {
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("delete-button");
+    deleteButton.setAttribute("id", index);
     deleteButton.textContent = "Delete";
     formEntry.appendChild(deleteButton);
 

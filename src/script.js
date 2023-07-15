@@ -48,3 +48,14 @@ function saveFormEntry() {
     localStorage.setItem('entryList', JSON.stringify(entryList));
 }
 
+function deleteEntry(index) {
+    // Remove the entry using index of the entryList
+    const entryList = JSON.parse(localStorage.getItem('entryList')) || [];
+    if (index >= 0 && index < entryList.length) {
+        entryList.splice(index, 1);
+    }
+    localStorage.setItem('entryList', JSON.stringify(entryList)); // Update localStorage
+
+    // Trigger the storage event to notify other tabs about the change
+    localStorage.setItem('entryListUpdated', Date.now());
+}
