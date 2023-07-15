@@ -1,14 +1,14 @@
 body {
     font-family: "Helvetica Neue", Arial;
     font-size: 20px;
-    background-color: lightyellow;
+    background-color: #F5F7FE;
 }
 
 
 nav {
     margin-bottom: 20px;
     padding: 10px;
-    background-color: #4caf50;
+    background-color: #111F23;
     display: flex;
     justify-content: center;
     padding-right: 50vh;
@@ -62,7 +62,7 @@ button {
 }
 
 #submit-button {
-    background-color: #4caf50;
+    background-color: #111F23;
 }
 
 #submit-button:hover {
@@ -88,10 +88,11 @@ button {
     margin: auto;
     transition: transform 0.3s ease-in-out;
 }
+
 .submit-history-card {
-    background-color: white;
+    background-color: #FFFFFF;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
     padding: 30px;
 }
 
