@@ -20,8 +20,6 @@ window.addEventListener("load", () => {
 })
 
 
-
-
 historyLists.addEventListener("click", function(event) {
     if (event.target.classList.contains("delete-button")) {
         // Call the deleteEntry function
@@ -41,10 +39,16 @@ function deleteEntry(index) {
     // Update the local storage entryList
     localStorage.setItem('entryList', JSON.stringify(entryList));
 
+    // Trigger the storage event
+    localStorage.setItem('entryListUpdated', Date.now());
 
 }
 
-
+window.addEventListener("storage", function(event) {
+    if (event.key === 'entryListUpdated') {
+        renderEntries();
+    }
+})
 
 
 function renderEntries() {
@@ -90,7 +94,3 @@ function createFormHistoryEntry(entry, index) {
 
     return formEntry;
 }
-
-
-
-
