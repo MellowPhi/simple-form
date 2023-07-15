@@ -4,11 +4,15 @@ const inputs = form.querySelectorAll('input');
 inputs.forEach(input => {
     input.addEventListener('input', function () {
         localStorage.setItem(input.name, input.value);
-
+        // Trigger the storage event
+        localStorage.setItem('entryListUpdated', Date.now());
     });
 });
 
-window.addEventListener("load", () => {
+
+
+
+function autoFillInputs() {
     const inputs = form.querySelectorAll("input");
     inputs.forEach(input => {
         const storedValue = localStorage.getItem(input.name);
@@ -18,6 +22,10 @@ window.addEventListener("load", () => {
         }
     });
 
+}
+
+window.addEventListener("load", () => {
+    autoFillInputs();
 });
 
 form.addEventListener('submit', function (event) {
@@ -46,16 +54,8 @@ function saveFormEntry() {
     const entryList = JSON.parse(localStorage.getItem('entryList')) || [];
     entryList.push(entry);
     localStorage.setItem('entryList', JSON.stringify(entryList));
+
+
 }
 
-function deleteEntry(index) {
-    // Remove the entry using index of the entryList
-    const entryList = JSON.parse(localStorage.getItem('entryList')) || [];
-    if (index >= 0 && index < entryList.length) {
-        entryList.splice(index, 1);
-    }
-    localStorage.setItem('entryList', JSON.stringify(entryList)); // Update localStorage
 
-    // Trigger the storage event to notify other tabs about the change
-    localStorage.setItem('entryListUpdated', Date.now());
-}

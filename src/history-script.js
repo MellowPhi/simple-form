@@ -35,11 +35,14 @@ function deleteEntry(index) {
     if (index >= 0 && index < entryList.length) {
         entryList.splice(index, 1);
     }
-    console.log(index);
-    console.log(entryList);
+
+    // Update the local storage entryList
     localStorage.setItem('entryList', JSON.stringify(entryList));
 
+
 }
+
+
 
 
 function renderEntries() {
